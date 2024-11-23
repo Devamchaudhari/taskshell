@@ -1,0 +1,103 @@
+@import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap");
+
+:root {
+  --bg-primary: #0d1117;
+  --text-primary: #39ff14;
+  --text-secondary: #6c757d;
+  --accent-color: #00ffff;
+
+  --ff-primary: "Fira Code", monospace;
+
+  --fs-paragraph: 1.25rem;
+}
+
+/*------------------------------------*\
+  #RESET
+\*------------------------------------*/
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  color-scheme: dark;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  line-height: 1.5;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
+h1,
+h2,
+h3,
+p,
+ul,
+li {
+  margin: 0;
+}
+
+ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+input {
+  font: inherit;
+}
+
+/*------------------------------------*\
+  #GLOBAL
+\*------------------------------------*/
+body {
+  font-family: var(--ff-primary);
+  font-size: var(--fs-paragraph);
+  background-color: var(--bg-primary);
+  color: var(--text-secondary);
+}
+
+.terminal-container {
+  width: 100%;
+  max-width: 60rem;
+  margin-inline: auto;
+  display: grid;
+  gap: 1rem;
+  padding: 2rem;
+}
+
+.terminal__history {
+  display: grid;
+  gap: 1rem;
+}
+
+.terminal__commandline {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.terminal__user {
+  color: var(--accent-color);
+}
+
+.terminal__command {
+  color: var(--text-primary);
+}
+
+.terminal__form {
+  width: 100%;
+  max-width: 40rem;
+}
+
+.terminal__input {
+  background-color: transparent;
+  width: 100%;
+  outline: 0;
+  border: 0;
+  color: var(--text-primary);
+  padding: 0;
+}
