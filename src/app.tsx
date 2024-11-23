@@ -1,4 +1,4 @@
-import React, { FormEvent, useReducer, useState } from "preact/compat";
+import { FormEvent, useReducer, useState } from "preact/compat";
 
 type TaskType = {
   id: number;
@@ -56,13 +56,13 @@ const App = () => {
     dispatch({ type: "ADD_TASK", payload: { name } });
   };
 
-  const handleMarkDone = (id: number) => {
-    dispatch({ type: "MARK_DONE", payload: { id } });
-  };
+  // const handleMarkDone = (id: number) => {
+  //   dispatch({ type: "MARK_DONE", payload: { id } });
+  // };
 
-  const handleRemoveTask = (id: number) => {
-    dispatch({ type: "REMOVE_TASK", payload: { id } });
-  };
+  // const handleRemoveTask = (id: number) => {
+  //   dispatch({ type: "REMOVE_TASK", payload: { id } });
+  // };
 
   const commandOutput = (command: string) => {
     if (command.startsWith("add")) {
