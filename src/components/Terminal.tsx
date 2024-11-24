@@ -7,7 +7,7 @@ const Terminal = () => {
 
   return (
     <div className="terminal-container">
-      <History history={history} />
+      {history.length > 0 && <History history={history} />}
       <CommandLine
         command={command}
         setCommand={setCommand}

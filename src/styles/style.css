@@ -60,13 +60,29 @@ body {
   color: var(--text-secondary);
 }
 
-.terminal-container {
+.app-container {
+  display: grid;
+  gap: 2rem;
   width: 100%;
   max-width: 60rem;
   margin-inline: auto;
+  padding: 2rem;
+}
+
+.header {
+  display: grid;
+  gap: 0.5em;
+  text-align: center;
+}
+
+.main-title {
+  font-size: 2rem;
+  color: var(--text-primary);
+}
+
+.terminal-container {
   display: grid;
   gap: 1rem;
-  padding: 2rem;
 }
 
 .terminal__history {

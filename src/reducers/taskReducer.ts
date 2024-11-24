@@ -1,10 +1,12 @@
 import { ActionType, TasksType, TaskType } from "../types";
 
+let taskIdCounter = 1;
+
 const taskReducer = (state: TasksType, action: ActionType): TasksType => {
   switch (action.type) {
     case "ADD_TASK":
       const newTask: TaskType = {
-        id: Date.now(),
+        id: taskIdCounter++,
         name: action.payload.name,
         status: "pending",
         createdAt: new Date(),
@@ -16,7 +18,7 @@ const taskReducer = (state: TasksType, action: ActionType): TasksType => {
     case "MARK_DONE":
       return state.map((task) =>
         task.id === action.payload.id
-          ? { ...task, state: "done", completedAt: new Date() }
+          ? { ...task, status: "done", completedAt: new Date() }
           : task
       );
 

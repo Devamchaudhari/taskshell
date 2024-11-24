@@ -1,3 +1,8 @@
+export type HistoryType = {
+  command: string;
+  output: string;
+}[];
+
 export type TaskType = {
   id: number;
   name: string;
