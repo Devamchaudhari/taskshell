@@ -1,4 +1,4 @@
-import { FormEvent } from "preact/compat";
+import { FormEvent, useRef } from "preact/compat";
 
 type Props = {
   command: string;
@@ -7,9 +7,16 @@ type Props = {
 };
 
 const CommandLine = ({ command, setCommand, handleCommand }: Props) => {
+  const inputRef = useRef<HTMLInputElement>(null);
+
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
     handleCommand(command);
+
+    // keep the input in focus after command submission
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
   };
 
   return (
@@ -17,6 +24,7 @@ const CommandLine = ({ command, setCommand, handleCommand }: Props) => {
       <span className="terminal__user">~$</span>
       <form onSubmit={onSubmit} className="terminal__form">
         <input
+          ref={inputRef}
           type="text"
           value={command}
           onChange={(e) => setCommand((e.target as HTMLInputElement).value)}
