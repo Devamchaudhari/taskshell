@@ -1,33 +1,50 @@
-import { ActionType, TasksType, TaskType } from "../types";
+import { ActionType, TaskType } from "../types";
 
-let taskIdCounter = 1;
+let retrievedId = localStorage.getItem("taskIdCounter");
+let taskIdCounter = retrievedId ? parseInt(retrievedId, 10) : 1;
 
-const taskReducer = (state: TasksType, action: ActionType): TasksType => {
+const taskReducer = (state: TaskType[], action: ActionType): TaskType[] => {
+  let updatedState = state;
+
   switch (action.type) {
     case "ADD_TASK":
       const newTask: TaskType = {
-        id: taskIdCounter++,
+        id: taskIdCounter,
         name: action.payload.name,
         status: "pending",
         createdAt: new Date(),
         completedAt: null,
       };
 
-      return [...state, newTask];
+      taskIdCounter++;
+      localStorage.setItem("taskIdCounter", JSON.stringify(taskIdCounter));
+
+      updatedState = [...state, newTask];
+      break;
 
     case "MARK_DONE":
-      return state.map((task) =>
+      updatedState = state.map((task) =>
         task.id === action.payload.id
           ? { ...task, status: "done", completedAt: new Date() }
           : task
       );
+      break;
 
     case "REMOVE_TASK":
-      return state.filter((task) => task.id !== action.payload.id);
+      updatedState = state.filter((task) => task.id !== action.payload.id);
+
+      if (updatedState.length === 0) {
+        taskIdCounter = 1;
+        localStorage.setItem("taskIdCounter", "1");
+      }
+      break;
 
     default:
       return state;
   }
+
+  localStorage.setItem("tasks", JSON.stringify(updatedState));
+  return updatedState;
 };
 
 export default taskReducer;

@@ -1,12 +1,18 @@
 import { useReducer, useState } from "preact/compat";
 import taskReducer from "../reducers/taskReducer";
 import moment from "moment";
-import { HistoryType } from "../types";
+import { HistoryType, TaskType } from "../types";
 
 export const useTerminal = () => {
   const [command, setCommand] = useState<string>("");
   const [history, setHistory] = useState<HistoryType>([]);
-  const [tasks, dispatch] = useReducer(taskReducer, []);
+
+  const loadTasks = (): TaskType[] => {
+    const savedTasks = localStorage.getItem("tasks");
+    return savedTasks ? JSON.parse(savedTasks) : [];
+  };
+
+  const [tasks, dispatch] = useReducer(taskReducer, [], loadTasks);
 
   const executeCommand = (command: string) => {
     // "add" command
@@ -78,6 +84,7 @@ export const useTerminal = () => {
       }
 
       return `
+        Task ID: ${task.id}\n
         Task name: ${task.name}\n
         Task status: ${task.status}\n
         Date created: ${moment(task.createdAt).format("Do MMM, YYYY")}
