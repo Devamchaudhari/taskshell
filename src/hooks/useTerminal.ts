@@ -47,6 +47,12 @@ export const useTerminal = () => {
 
     // "rm" command
     if (command.startsWith("rm")) {
+      if (command === "rm -a") {
+        localStorage.removeItem("tasks");
+        dispatch({ type: "REMOVE_ALL_TASKS" });
+        return "All tasks have been removed.";
+      }
+
       const match = command.match(/#(\d+)/);
       if (!match) {
         return `Invalid command format. Use: rm #taskId (e.g., rm #1)`;
@@ -116,6 +122,7 @@ export const useTerminal = () => {
         add "task name" - Add a new task\n
         rm #taskId - Remove a task\n
         cat #taskId - Show info about a task\n
+        rm -a - Remove all tasks\n
         check #taskId - Mark the task as done\n
         ls - List all the tasks\n
         clear - Clear the terminal display\n

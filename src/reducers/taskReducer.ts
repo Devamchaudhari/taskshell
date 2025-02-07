@@ -39,6 +39,13 @@ const taskReducer = (state: TaskType[], action: ActionType): TaskType[] => {
       }
       break;
 
+    case "REMOVE_ALL_TASKS":
+      updatedState = [];
+      taskIdCounter = 1;
+      localStorage.setItem("taskIdCounter", "1");
+      localStorage.removeItem("tasks");
+      break;
+
     default:
       return state;
   }
